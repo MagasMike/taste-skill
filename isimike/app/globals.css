@@ -24,8 +24,8 @@
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --radius-lg: var(--radius);
-  --font-sans: var(--font-sans-greek), "Helvetica Neue", Arial, sans-serif;
-  --font-serif: var(--font-serif-greek), "Times New Roman", serif;
+  --font-sans: var(--font-sans-family), "Helvetica Neue", Arial, sans-serif;
+  --font-serif: var(--font-serif-family), "Times New Roman", serif;
 }
 
 html {

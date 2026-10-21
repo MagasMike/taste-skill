@@ -6,22 +6,22 @@ import { site } from "@/lib/site";
 
 const collection = [
   {
-    title: "Νέες αφίξεις",
-    text: "Ό,τι μόλις ήρθε στα ράφια μας, διαλεγμένο ένα προς ένα.",
+    title: "Neuheiten",
+    text: "Was gerade neu in unseren Regalen steht – Stück für Stück ausgewählt.",
     image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80",
-    alt: "Φωτεινό εσωτερικό καταστήματος με ράφια και κρεμάστρες",
+    alt: "Heller Ladenraum mit Regalen und Kleiderstangen",
   },
   {
-    title: "Τα αγαπημένα",
-    text: "Τα προϊόντα που ξαναζητάτε ξανά και ξανά.",
+    title: "Lieblingsstücke",
+    text: "Die Produkte, nach denen Sie immer wieder fragen.",
     image: "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&w=1200&q=80",
-    alt: "Προϊόντα τακτοποιημένα σε προθήκη καταστήματος",
+    alt: "Ordentlich präsentierte Produkte in einer Ladenauslage",
   },
   {
-    title: "Για δώρο",
-    text: "Ιδέες για κάθε περίσταση, με περιτύλιγμα από εμάς.",
+    title: "Zum Verschenken",
+    text: "Ideen für jeden Anlass – auf Wunsch schön verpackt.",
     image: "https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=1200&q=80",
-    alt: "Βιτρίνα καταστήματος στον δρόμο",
+    alt: "Schaufenster eines Ladens an der Straße",
   },
 ];
 
@@ -31,20 +31,21 @@ export default function Home() {
       <SculptureHero
         brand={site.name}
         navLinks={[
-          { label: "Το μαγαζί", href: "#about" },
-          { label: "Συλλογή", href: "#collection" },
-          { label: "Ωράριο", href: "#visit" },
+          { label: "Der Laden", href: "#about" },
+          { label: "Sortiment", href: "#collection" },
+          { label: "Öffnungszeiten", href: "#visit" },
         ]}
-        navCta={{ label: "Επικοινωνία", href: "#visit" }}
+        navCta={{ label: "Kontakt", href: "#visit" }}
         themeToggle={false}
         eyebrow={site.tagline}
-        headline={"Ποιότητα που\nξεχωρίζει."}
-        headlineAccent="ξεχωρίζει."
-        body="Στο ISIMIKE θα βρείτε προσεγμένα προϊόντα, φιλική εξυπηρέτηση και ανθρώπους που ξέρουν τι πουλάνε."
-        primaryCta={{ label: "Δείτε τη συλλογή", href: "#collection" }}
-        secondaryCta={{ label: "Πού θα μας βρείτε", href: "#visit" }}
-        hint="Περάστε τον κέρσορα από πάνω"
-        hintTouch="Αγγίξτε το σχήμα"
+        headline={"Qualität, die\nauffällt."}
+        headlineAccent="auffällt."
+        body="Bei ISIMIKE finden Sie sorgfältig ausgewählte Produkte, freundliche Beratung und Menschen, die wissen, was sie verkaufen."
+        primaryCta={{ label: "Zum Sortiment", href: "#collection" }}
+        secondaryCta={{ label: "So finden Sie uns", href: "#visit" }}
+        hint="Fahren Sie mit der Maus darüber"
+        hintTouch="Berühren Sie die Form"
+        imageAlt="Abstrakte Skulptur aus verflochtenen metallischen Fäden und Partikeln"
         backdropText="isimike"
         loadFonts={false}
         headingFont="var(--font-sans)"
@@ -54,25 +55,25 @@ export default function Home() {
 
       <section id="about" className="mx-auto grid max-w-6xl gap-10 px-5 py-24 md:grid-cols-[1.1fr_1fr] md:items-center md:px-12 md:py-32">
         <div>
-          <p className="mb-5 text-xs uppercase tracking-[0.14em] text-muted-foreground">Το μαγαζί</p>
+          <p className="mb-5 text-xs uppercase tracking-[0.14em] text-muted-foreground">Der Laden</p>
           <h2 className="text-4xl font-medium leading-[1.02] tracking-[-0.035em] text-balance md:text-6xl">
-            Μικρό μαγαζί, <span className="font-serif font-normal italic">μεγάλη φροντίδα.</span>
+            Kleiner Laden, <span className="font-serif font-normal italic">große Sorgfalt.</span>
           </h2>
         </div>
         <div className="space-y-5 text-[17px] leading-relaxed text-muted-foreground text-pretty">
           <p>
-            Το ISIMIKE ξεκίνησε με μια απλή ιδέα: λίγα αλλά καλά πράγματα, και χρόνο για κάθε πελάτη. Κάθε προϊόν στα
-            ράφια μας το έχουμε δοκιμάσει και το προτείνουμε με σιγουριά.
+            ISIMIKE begann mit einer einfachen Idee: wenige, aber gute Dinge – und Zeit für jeden Kunden. Jedes Produkt
+            in unseren Regalen haben wir selbst getestet und empfehlen es mit gutem Gewissen.
           </p>
-          <p>Περάστε να γνωριστούμε, θα σας κεράσουμε και μια κουβέντα.</p>
+          <p>Schauen Sie vorbei und lernen Sie uns kennen – wir freuen uns auf ein Gespräch.</p>
         </div>
       </section>
 
       <section id="collection" className="border-t border-border">
         <div className="mx-auto max-w-6xl px-5 py-24 md:px-12 md:py-32">
           <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
-            <h2 className="text-4xl font-medium tracking-[-0.035em] md:text-5xl">Συλλογή</h2>
-            <p className="max-w-sm text-muted-foreground">Μια γεύση από όσα θα βρείτε στο κατάστημα. Η πλήρης γκάμα σας περιμένει από κοντά.</p>
+            <h2 className="text-4xl font-medium tracking-[-0.035em] md:text-5xl">Sortiment</h2>
+            <p className="max-w-sm text-muted-foreground">Ein Vorgeschmack auf das, was Sie im Laden erwartet. Das ganze Sortiment entdecken Sie vor Ort.</p>
           </div>
           <div className="grid gap-6 md:grid-cols-3">
             {collection.map((item) => (
@@ -98,7 +99,7 @@ export default function Home() {
         <div className="mx-auto grid max-w-6xl gap-14 px-5 py-24 md:grid-cols-2 md:px-12 md:py-32">
           <div>
             <h2 className="text-4xl font-medium leading-[1.02] tracking-[-0.035em] md:text-6xl">
-              Ελάτε να <span className="font-serif font-normal italic">μας δείτε.</span>
+              Besuchen Sie <span className="font-serif font-normal italic">uns.</span>
             </h2>
             <a
               href={site.mapsUrl}
@@ -106,20 +107,20 @@ export default function Home() {
               rel="noopener"
               className="mt-10 inline-flex h-12 items-center gap-2 rounded-full bg-primary-foreground px-6 font-medium text-primary transition-transform hover:-translate-y-px"
             >
-              Οδηγίες στον χάρτη <ArrowUpRight className="size-4" aria-hidden />
+              Route in Google Maps <ArrowUpRight className="size-4" aria-hidden />
             </a>
           </div>
 
           <dl className="grid gap-8 sm:grid-cols-2">
             <div>
               <dt className="mb-2 flex items-center gap-2 text-sm opacity-60">
-                <MapPin className="size-4" aria-hidden /> Διεύθυνση
+                <MapPin className="size-4" aria-hidden /> Adresse
               </dt>
               <dd>{site.address}</dd>
             </div>
             <div>
               <dt className="mb-2 flex items-center gap-2 text-sm opacity-60">
-                <Phone className="size-4" aria-hidden /> Τηλέφωνο
+                <Phone className="size-4" aria-hidden /> Telefon
               </dt>
               <dd>
                 <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="underline-offset-4 hover:underline">
@@ -139,7 +140,7 @@ export default function Home() {
             </div>
             <div className="sm:col-span-2">
               <dt className="mb-2 flex items-center gap-2 text-sm opacity-60">
-                <Clock className="size-4" aria-hidden /> Ωράριο
+                <Clock className="size-4" aria-hidden /> Öffnungszeiten
               </dt>
               <dd className="max-w-sm space-y-1">
                 {site.hours.map((h) => (
@@ -156,7 +157,7 @@ export default function Home() {
 
       <footer className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-5 py-8 text-sm text-muted-foreground md:px-12">
         <span className="font-semibold text-foreground">{site.name}</span>
-        <span>© {new Date().getFullYear()} {site.name}. Με επιφύλαξη παντός δικαιώματος.</span>
+        <span>© {new Date().getFullYear()} {site.name}. Alle Rechte vorbehalten.</span>
       </footer>
     </main>
   );
