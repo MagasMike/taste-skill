@@ -1,14 +1,19 @@
-// Store details shown across the page. Replace the placeholders with the real ones.
 export const site = {
   name: "ISIMIKE",
-  tagline: "Ihr Laden in der Nachbarschaft",
-  address: "Musterstraße 1, 12345 Stadt",
-  mapsUrl: "https://maps.google.com/?q=ISIMIKE",
-  phone: "+49 30 000000",
-  email: "info@isimike.de",
+  tagline: "Authentic Thessaloniki Style",
+  street: "Friedrich-List-Straße 5",
+  city: "71364 Winnenden",
+  note: "Am OBI-Parkplatz",
+  mapsUrl:
+    "https://www.google.com/maps/search/?api=1&query=ISIMIKE+Foodtruck+Friedrich-List-Stra%C3%9Fe+5+71364+Winnenden",
+  phone: "0176 228 593 73",
+  phoneHref: "tel:+4917622859373",
   hours: [
-    { days: "Montag – Freitag", time: "09:00 – 21:00" },
-    { days: "Samstag", time: "09:00 – 18:00" },
-    { days: "Sonntag", time: "Geschlossen" },
+    { days: "Montag – Samstag", time: "11:30 – 21:00" },
+    { days: "Sonntag & Feiertage", time: "16:00 – 21:00" },
+  ],
+  order: [
+    { label: "Lieferando", href: "https://www.lieferando.de/speisekarte/isi-mike-foodtruck" },
+    { label: "Uber Eats", href: "https://www.ubereats.com/de/store/isimike-foodtruck/fEh0y-NYU0S7fAdqjEiNkA" },
   ],
 }

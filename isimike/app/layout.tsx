@@ -16,8 +16,8 @@ const serif = Noto_Serif_Display({
 });
 
 export const metadata: Metadata = {
-  title: "ISIMIKE",
-  description: "ISIMIKE – Ihr Laden in der Nachbarschaft. Sortiment, Öffnungszeiten und Kontakt.",
+  title: "ISIMIKE – Authentic Thessaloniki Style",
+  description: "ISIMIKE Foodtruck in Winnenden – Gyros, Souvlaki und Pitas im Authentic Thessaloniki Style. Speisekarte, Öffnungszeiten und Bestellung.",
 };
 
 export default function RootLayout({

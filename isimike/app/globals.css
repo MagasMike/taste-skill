@@ -2,15 +2,17 @@
 
 :root {
   --radius: 0.75rem;
-  --background: #ebe9e5;
-  --foreground: #151514;
-  --muted: #e1ded8;
-  --muted-foreground: #5c5a55;
-  --border: #d5d1c9;
-  --card: #f3f1ed;
-  --card-foreground: #151514;
-  --primary: #151514;
-  --primary-foreground: #ebe9e5;
+  --background: #0f0e0d;
+  --foreground: #f1efea;
+  --muted: #1b1a18;
+  --muted-foreground: #a19d95;
+  --border: #2b2926;
+  --card: #171614;
+  --card-foreground: #f1efea;
+  --primary: #f1efea;
+  --primary-foreground: #0f0e0d;
+  --accent: #b3242a;
+  --accent-foreground: #ffffff;
 }
 
 @theme inline {
@@ -23,6 +25,8 @@
   --color-card-foreground: var(--card-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
   --radius-lg: var(--radius);
   --font-sans: var(--font-sans-family), "Helvetica Neue", Arial, sans-serif;
   --font-serif: var(--font-serif-family), "Times New Roman", serif;
