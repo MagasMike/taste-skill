@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ISIMIKE Foodtruck · Winnenden</title>
+<meta name="description" content="ISIMIKE – griechisch-balkanischer Foodtruck von Isi und Mike am OBI-Parkplatz in Winnenden. Gyros vom Spieß, Souvlaki, Ćevapčići und der Double Tower für zwei.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #e6dbc7;
+  --surface: #ddd0b9;
+  --ink: #062b8a;
+  --muted: #3a5aa8;
+  --accent: #062b8a;
+  --accent-ink: #e6dbc7;
+
+  --font: "Archivo", "Arial Narrow", system-ui, sans-serif;
+
+  --step-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
+  --step-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  --step-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
+  --step-head: clamp(2.5rem, 1.2rem + 5vw, 5.5rem);
+
+  --margin: clamp(16px, 2.2vw, 32px);
+  --gap: clamp(120px, 13vw, 200px);
+  --ease: cubic-bezier(.2, .7, .2, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: var(--step-body);
+  line-height: 1.5;
+  font-kerning: normal;
+}
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+h1, h2, h3, p, ul, ol, dl, dd { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+.display {
+  font-weight: 800;
+  font-stretch: 62%;
+  font-variation-settings: "wdth" 62;
+  text-transform: uppercase;
+  letter-spacing: -.01em;
+  line-height: .86;
+}
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+::selection { background: var(--ink); color: var(--bg); }
+:focus-visible { outline: 3px solid currentColor; outline-offset: 3px; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 48px; padding: 0 22px;
+  background: var(--accent); color: var(--accent-ink);
+  font: 500 var(--step-small)/1 var(--font);
+  text-decoration: none; border: 0; border-radius: 0; cursor: pointer;
+  transition: transform .2s var(--ease);
+}
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: translateY(1px) scale(.98); }
+.btn--sand { background: var(--bg); color: var(--ink); }
+.link { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; transition: text-underline-offset .2s var(--ease); }
+.link:hover { text-underline-offset: 7px; }
+
+/* ---------- hero: the name as a film title ---------- */
+.hero {
+  position: relative; height: 100svh; min-height: 560px;
+  overflow: hidden; background: #14130f; color: var(--bg);
+}
+.slides { position: absolute; inset: 0; }
+.slides img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  opacity: 0; transition: opacity 1.6s ease-in-out;
+  animation: drift 18s ease-in-out infinite alternate;
+}
+.slides img.is-on { opacity: 1; }
+@keyframes drift { from { transform: scale(1.04); } to { transform: scale(1.1) translateX(-1.5%); } }
+/* neutral scrim under the name only (the one permitted case) */
+.hero::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 45%;
+  background: linear-gradient(to top, rgba(10,10,8,.72), rgba(10,10,8,0)); /* taste-skill-ignore */
+  pointer-events: none;
+}
+.top {
+  position: absolute; z-index: 2; top: 0; left: 0; right: 0;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 24px var(--margin);
+}
+.emblem { font-weight: 800; font-stretch: 62%; font-size: 26px; text-decoration: none; letter-spacing: .01em; }
+.top-status { margin-left: 32px; font-size: 15px; }
+.top nav { display: flex; gap: 28px; font-size: 15px; margin-left: auto; margin-right: 32px; }
+.top nav a { text-decoration: none; }
+.top nav a:hover { text-decoration: underline; text-underline-offset: 5px; }
+.hero-foot { position: absolute; z-index: 2; left: var(--margin); right: var(--margin); bottom: 28px; }
+.hero-meta { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 18px; }
+.hero-meta p { max-width: 34ch; font-size: var(--step-body); line-height: 1.4; }
+.status { font-weight: 500; }
+.dot { display: inline-block; margin-right: 8px; vertical-align: 1px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; background: currentColor; flex: none; }
+.is-open .dot { animation: pulse 2.4s var(--ease) infinite; }
+@keyframes pulse { 50% { transform: scale(.5); opacity: .45; } }
+.fit { display: inline-block; white-space: nowrap; }
+.hero h1 { font-size: 30vw; margin-bottom: -.06em; }
+
+/* ---------- marquee ---------- */
+.marquee { background: var(--ink); color: var(--bg); overflow: hidden; padding: 18px 0; }
+.marquee-track { display: flex; width: max-content; animation: marquee 38s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee span { font-weight: 800; font-stretch: 62%; text-transform: uppercase; font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1; padding-right: .6em; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* ---------- grid ---------- */
+.section { padding: var(--gap) var(--margin) 0; }
+.grid { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 24px; }
+
+/* intro */
+.intro h2 { grid-column: 1 / 7; font-size: var(--step-head); align-self: end; }
+.intro .note { grid-column: 9 / 13; align-self: end; max-width: 34ch; }
+.facts { margin-top: 120px; display: flex; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+.fact strong { display: block; font-weight: 800; font-stretch: 62%; text-transform: uppercase; font-size: var(--step-head); line-height: .9; }
+.fact span { display: block; margin-top: 10px; font-size: var(--step-small); color: var(--muted); }
+.intro-pic { margin: 96px 0 0; display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 24px; }
+.intro-pic .wide { grid-column: 1 / 13; overflow: hidden; }
+.intro-pic figcaption { grid-column: 1 / 13; }
+.intro-pic img { width: 100%; aspect-ratio: 21 / 9; object-fit: cover; }
+figcaption { margin-top: 12px; font-size: var(--step-small); color: var(--muted); }
+
+/* menu: statement, table pushed right */
+.menu h2 { font-size: var(--step-head); }
+.menu h2 .l1 { display: block; padding-left: 3vw; }
+.menu-body { margin-top: 96px; }
+.menu-pic { grid-column: 1 / 5; align-self: end; margin: 0; }
+.menu-pic img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.menu-word { grid-column: 6 / 8; font-size: var(--step-small); color: var(--muted); padding-top: 4px; }
+.menu-table { grid-column: 8 / 13; }
+.group + .group { margin-top: 44px; }
+.group h3 { font-size: var(--step-lead); font-weight: 800; font-stretch: 62%; text-transform: uppercase; line-height: 1; margin-bottom: 14px; }
+.row { display: grid; grid-template-columns: 1fr auto; column-gap: 24px; padding: 13px 0; }
+.row b { font-weight: 500; }
+.row small { grid-column: 1; font-size: var(--step-small); color: var(--muted); margin-top: 2px; }
+.row .p { grid-column: 2; grid-row: 1; font-variant-numeric: tabular-nums; font-weight: 500; }
+.menu-note { margin-top: 32px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: var(--step-small); }
+
+/* about: pinned name, two kitchens pass */
+.about { position: relative; margin-top: var(--gap); padding: 0 var(--margin); }
+.about-in { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 24px; }
+.about-pin { grid-column: 1 / 7; position: sticky; top: 0; height: 100svh; display: flex; flex-direction: column; justify-content: center; }
+.about-pin h2 { font-size: clamp(5rem, 14vw, 13rem); }
+.about-pin p { margin-top: 32px; max-width: 36ch; }
+.passes { grid-column: 8 / 13; padding: 30svh 0 30svh; display: grid; gap: 40svh; }
+.pass img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.pass h3 { margin-top: 18px; font-size: 18px; font-weight: 500; }
+.pass span { display: block; font-size: var(--step-small); color: var(--muted); }
+.pass p { margin-top: 10px; max-width: 34ch; }
+.pass:nth-child(2) { margin-left: 18%; }
+
+/* contact: the phone number as display type */
+.call {
+  margin-top: var(--gap);
+  background: var(--ink); color: var(--bg);
+  padding: 32px var(--margin) 28px;
+  display: grid; row-gap: 24px;
+}
+.call-head { display: flex; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+.call-head h2 { font-size: var(--step-lead); font-weight: 500; max-width: 26ch; line-height: 1.25; }
+.hours { border-collapse: collapse; font-variant-numeric: tabular-nums; min-width: 300px; }
+.hours th { text-align: left; font-weight: 400; padding: 4px 32px 4px 0; }
+.hours td { text-align: right; padding: 4px 0; }
+.hours tr.is-today { font-weight: 600; }
+.number { margin-top: 140px; text-decoration: none; transition: opacity .25s var(--ease); }
+.number:hover { opacity: .8; }
+.number .fit { font-size: 14vw; }
+.call-foot { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; font-size: var(--step-small); }
+.call-foot .btn { margin-left: auto; }
+
+/* footer */
+footer {
+  background: var(--ink); color: var(--bg);
+  padding: 40px var(--margin) 24px;
+}
+.cols { display: grid; grid-template-columns: repeat(4, 1fr); column-gap: 24px; font-size: 16px; }
+.cols li { color: #b8c3e0; }
+.cols li:first-child { color: var(--bg); font-weight: 500; }
+.cols a { text-decoration: none; }
+.cols a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.wordmark { margin-top: 160px; }
+.wordmark .fit { font-size: 30vw; line-height: .78; }
+.legal { margin-top: 20px; font-size: var(--step-small); color: #b8c3e0; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+/* ---------- entrances ---------- */
+.js [data-rise] { opacity: 0; transform: translateY(24px); transition: opacity .8s var(--ease), transform .8s var(--ease); transition-delay: calc(var(--i, 0) * 80ms); }
+.js [data-rise].is-in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .js [data-rise] { opacity: 1; transform: none; }
+}
+
+/* ---------- tablet ---------- */
+@media (max-width: 1000px) {
+  .intro h2, .intro .note { grid-column: 1 / 13; }
+  .intro .note { margin-top: 24px; }
+  .menu-word { display: none; }
+  .menu-pic { grid-column: 1 / 6; }
+  .menu-table { grid-column: 7 / 13; }
+}
+
+/* ---------- phone ---------- */
+@media (max-width: 760px) {
+  .top nav { display: none; }
+  .top { flex-wrap: wrap; }
+  .top-status { order: 3; width: 100%; margin: 14px 0 0; }
+  .hero-meta { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .facts { display: grid; grid-template-columns: 1fr 1fr; row-gap: 32px; margin-top: 64px; }
+  .intro-pic img { aspect-ratio: 4 / 3; }
+  .menu h2 .l1 { padding-left: 0; }
+  .menu-body { margin-top: 48px; }
+  .menu-table { grid-column: 1 / 13; order: 1; }
+  .menu-pic { grid-column: 4 / 13; order: 2; margin-top: 48px; }
+
+  .about-in { display: block; }
+  .about-pin { position: static; height: auto; }
+  .about-pin h2 { font-size: 17vw; }
+  .passes { padding: 32px 0 0; gap: 48px; }
+  .pass { width: 78%; }
+  .pass:nth-child(2) { margin-left: auto; }
+
+  .number { margin-top: 72px; }
+  .wordmark { margin-top: 96px; }
+  .hours { min-width: 0; width: 100%; }
+  .call-foot { flex-direction: column; }
+  .call-foot .btn { margin-left: 0; width: 100%; }
+  .cols { grid-template-columns: 1fr 1fr; row-gap: 32px; font-size: 15px; }
+  .cols ul { display: grid; gap: 4px; }
+}
+</style>
+</head>
+<body>
+<header class="hero" id="top">
+  <div class="slides" aria-hidden="true">
+    <img class="is-on" src="https://picsum.photos/id/490/2400/1500" width="2400" height="1500" alt="">
+    <img src="https://picsum.photos/id/999/2400/1500" width="2400" height="1500" alt="">
+    <img src="https://picsum.photos/id/292/2400/1500" width="2400" height="1500" alt="">
+  </div>
+  <div class="top">
+    <a class="emblem" href="#top" aria-label="ISIMIKE, nach oben">I+M</a>
+    <p class="status top-status" id="status"><span class="dot" aria-hidden="true"></span><span class="status-text">Mo–Fr 13:00–20:45 · Sa 11:00–20:45</span></p>
+    <nav aria-label="Hauptnavigation">
+      <a href="#karte">Speisekarte</a>
+      <a href="#wir">Isi &amp; Mike</a>
+      <a href="#anrufen">Standort &amp; Zeiten</a>
+    </nav>
+    <a class="btn btn--sand" href="https://www.ubereats.com/de/store/isimike-foodtruck/fEh0y-NYU0S7fAdqjEiNkA">Jetzt bestellen</a>
+  </div>
+  <div class="hero-foot">
+    <div class="hero-meta">
+      <p>Griechisch-balkanischer Foodtruck am OBI-Parkplatz in Winnenden, mit Gyros vom Spieß und Grill vom Balkan.</p>
+    </div>
+    <h1 class="display" aria-label="ISIMIKE, Foodtruck in Winnenden"><span class="fit" data-fit>Isimike</span></h1>
+  </div>
+</header>
+
+<main>
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Gyros vom Spieß ·</span><span>Souvlaki ·</span><span>Ćevapčići ·</span><span>Pljeskavica ·</span><span>Double Tower für zwei ·</span>
+      <span>Gyros vom Spieß ·</span><span>Souvlaki ·</span><span>Ćevapčići ·</span><span>Pljeskavica ·</span><span>Double Tower für zwei ·</span>
+    </div>
+  </div>
+
+  <section class="section intro" aria-labelledby="intro-h">
+    <div class="grid">
+      <h2 id="intro-h" class="display" data-rise>Zwei Namen,<br>ein Grill</h2>
+      <p class="note" data-rise style="--i:1">ISI plus MIKE ergibt ISIMIKE. Gyros und Souvlaki aus Griechenland treffen auf den Grill des Balkans, frisch aus unserem Truck am OBI in Winnenden.</p>
+    </div>
+    <div class="facts">
+      <p class="fact" data-rise><strong>13–20:45</strong><span>Montag bis Freitag</span></p>
+      <p class="fact" data-rise style="--i:1"><strong>11–20:45</strong><span>Samstag, sonntags Ruhetag</span></p>
+      <p class="fact" data-rise style="--i:2"><strong>Am OBI</strong><span>Friedrich-List-Straße, Winnenden</span></p>
+      <p class="fact" data-rise style="--i:3"><strong>Lieferung</strong><span>über Uber Eats</span></p>
+    </div>
+    <figure class="intro-pic" data-rise>
+      <div class="wide"><img src="https://picsum.photos/id/292/2400/1030" width="2400" height="1030" alt="Frisches Gemüse, rote Zwiebel und Pfeffer auf einem Holzbrett" loading="lazy"></div>
+      <figcaption>Tomaten, Zwiebeln, Paprika: geschnitten wird jeden Morgen.</figcaption>
+    </figure>
+  </section>
+
+  <section class="section menu" id="karte" aria-labelledby="karte-h">
+    <h2 id="karte-h" class="display" data-rise><span class="l1">Vom Spieß</span>und vom Grill</h2>
+    <div class="grid menu-body">
+      <figure class="menu-pic" data-rise>
+        <img src="https://picsum.photos/id/326/1000/1250" width="1000" height="1250" alt="Hand hält eine weiße Schale mit Zitronenscheiben" loading="lazy">
+        <figcaption>Zitrone gehört aufs Souvlaki.</figcaption>
+      </figure>
+      <p class="menu-word">Speisekarte</p>
+      <div class="menu-table">
+        <div class="group" data-rise>
+          <h3>Gyros &amp; Souvlaki</h3>
+          <p class="row"><b>Gyros Pita</b><span class="p">7,50 €</span><small>Pita, Gyros, Tomate, Zwiebel, Pommes, Sauce</small></p>
+          <p class="row"><b>Gyros Teller</b><span class="p">13,90 €</span><small>Mit Pommes, Bauernsalat und Tzatziki</small></p>
+          <p class="row"><b>Souvlaki Pita</b><span class="p">7,50 €</span><small>Zwei Spieße, Tomate, Zwiebel, Tzatziki</small></p>
+          <p class="row"><b>Souvlaki Teller</b><span class="p">14,50 €</span><small>Drei Spieße, Pommes, Salat, Tzatziki</small></p>
+        </div>
+        <div class="group" data-rise>
+          <h3>Vom Balkan-Grill</h3>
+          <p class="row"><b>Ćevapčići Teller</b><span class="p">13,90 €</span><small>Zehn Stück, Ajvar, Zwiebeln, Fladenbrot</small></p>
+          <p class="row"><b>Pljeskavica</b><span class="p">9,50 €</span><small>Gegrillter Burger im Fladenbrot, Kajmak, Salat</small></p>
+          <p class="row"><b>Bifteki Teller</b><span class="p">14,50 €</span><small>Mit Feta gefüllt, Pommes, Salat, Tzatziki</small></p>
+        </div>
+        <div class="group" data-rise>
+          <h3>Für zwei</h3>
+          <p class="row"><b>Double Tower</b><span class="p">29,90 €</span><small>Gyros-Turm mit Pita, unserer Sauce, Tomaten und Käse</small></p>
+          <p class="row"><b>Mix-Grill für zwei</b><span class="p">32,90 €</span><small>Gyros, Souvlaki, Ćevapčići, Pommes, Salat</small></p>
+        </div>
+        <div class="group" data-rise>
+          <h3>Dazu</h3>
+          <p class="row"><b>Bauernsalat</b><span class="p">8,50 €</span><small>Tomate, Gurke, Paprika, Oliven, Feta</small></p>
+          <p class="row"><b>Pommes / mit Feta</b><span class="p">3,90 / 5,50 €</span><small>Mit Oregano und Meersalz</small></p>
+          <p class="row"><b>Tzatziki, Ajvar, unsere Sauce</b><span class="p">je 2,50 €</span></p>
+        </div>
+        <p class="menu-note"><span>Preise inkl. MwSt. Alles auch zum Mitnehmen.</span><a class="link" href="https://www.ubereats.com/de/store/isimike-foodtruck/fEh0y-NYU0S7fAdqjEiNkA">Bestellen bei Uber Eats</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="wir" aria-labelledby="wir-h">
+    <div class="about-in">
+      <div class="about-pin">
+        <h2 id="wir-h" class="display">Isi<br>&amp; Mike</h2>
+        <p>Zwei Namen, zwei Küchen, ein Truck. Wer ISIMIKE liest, liest uns beide.</p>
+      </div>
+      <div class="passes">
+        <article class="pass" data-rise>
+          <img src="https://picsum.photos/id/999/1000/1250" width="1000" height="1250" alt="Schalen und Gebäck auf einem dunklen Holztisch von oben" loading="lazy">
+          <h3>Isi</h3>
+          <span>Die Balkan-Seite</span>
+          <p>Ćevapčići, Pljeskavica und Ajvar: Hackfleisch über offener Flamme, so wie man es zwischen Belgrad und Sarajevo isst.</p>
+        </article>
+        <article class="pass" data-rise>
+          <img src="https://picsum.photos/id/225/1000/1250" width="1000" height="1250" alt="Glaskanne mit Kräutertee neben gelben Blumen" loading="lazy">
+          <h3>Mike</h3>
+          <span>Die griechische Seite</span>
+          <p>Gyros vom Drehspieß, Souvlaki mit Zitrone und Oregano, Tzatziki und die eigene Sauce, die es nur bei uns gibt.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="call" id="anrufen" aria-labelledby="call-h">
+    <div class="call-head">
+      <h2 id="call-h" data-rise>Hunger? Ruf an und hol dein Essen ohne Warten ab.</h2>
+      <table class="hours" aria-label="Öffnungszeiten" data-rise style="--i:1">
+        <tr data-days="1,2,3,4,5"><th scope="row">Montag – Freitag</th><td>13:00 – 20:45</td></tr>
+        <tr data-days="6"><th scope="row">Samstag</th><td>11:00 – 20:45</td></tr>
+        <tr data-days="0"><th scope="row">Sonntag</th><td>Ruhetag</td></tr>
+      </table>
+    </div>
+    <a class="number display" href="tel:+491729767753" aria-label="Anrufen: 0172 976 77 53"><span class="fit" data-fit>0172 976 77 53</span></a>
+    <div class="call-foot">
+      <span>OBI-Parkplatz, Friedrich-List-Straße, 71364 Winnenden</span>
+      <span class="status" id="status-2"><span class="dot" aria-hidden="true"></span><span class="status-text"></span></span>
+      <a class="btn btn--sand" href="https://www.google.com/maps/search/?api=1&amp;query=OBI+Friedrich-List-Stra%C3%9Fe+Winnenden">Route planen</a>
+    </div>
+  </section>
+</main>
+
+<footer aria-labelledby="foot-h">
+  <div class="cols">
+    <ul><li id="foot-h">ISIMIKE Foodtruck</li><li>OBI-Parkplatz</li><li>Friedrich-List-Straße</li><li>71364 Winnenden</li></ul>
+    <ul><li>Seite</li><li><a href="#karte">Speisekarte</a></li><li><a href="#wir">Isi &amp; Mike</a></li><li><a href="#anrufen">Standort &amp; Zeiten</a></li></ul>
+    <ul><li>Bestellen</li><li><a href="tel:+491729767753">0172 976 77 53</a></li><li><a href="https://www.ubereats.com/de/store/isimike-foodtruck/fEh0y-NYU0S7fAdqjEiNkA">Uber Eats</a></li><li><a href="https://isimike-food-truck.simplywebshop.de/storedata/listStore">Online-Shop</a></li></ul>
+    <ul><li>Zeiten</li><li>Mo–Fr 13:00–20:45</li><li>Sa 11:00–20:45</li><li>So Ruhetag</li></ul>
+  </div>
+  <p class="wordmark display" aria-hidden="true"><span class="fit" data-fit>Isimike</span></p>
+  <p class="legal"><span>© 2026 ISIMIKE Foodtruck, Winnenden · <a class="link" href="#impressum">Impressum</a> · <a class="link" href="#datenschutz">Datenschutz</a></span><span>Fotos: Todd Quackenbush, Annie Spratt, Webvilla, Dominik Martin, Vee O (Unsplash-Lizenz)</span></p>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+
+/* Fit the name and the phone number to the full width between the margins */
+(function () {
+  var els = [].slice.call(document.querySelectorAll('[data-fit]'));
+  function fit() {
+    els.forEach(function (el) {
+      var box = el.parentNode.getBoundingClientRect().width;
+      /* type does not scale quite linearly, so measure and correct a few times */
+      var size = 100;
+      for (var k = 0; k < 4; k++) {
+        el.style.fontSize = size + 'px';
+        var w = el.getBoundingClientRect().width;
+        if (!w) return;
+        size = size * box / w;
+      }
+      el.style.fontSize = Math.floor(size * 0.995) + 'px';
+    });
+  }
+  fit();
+  if (document.fonts) document.fonts.ready.then(fit);
+  window.addEventListener('load', fit);
+  window.addEventListener('resize', fit);
+  /* refit when the web font swaps in and changes the measured width */
+  if ('ResizeObserver' in window) {
+    var busy = false;
+    var ro = new ResizeObserver(function () {
+      if (busy) return;
+      busy = true; fit();
+      requestAnimationFrame(function () { busy = false; });
+    });
+    els.forEach(function (el) { ro.observe(el); });
+  }
+})();
+
+/* Live status: open now, and how long until close or the next opening */
+(function () {
+  var open = { 1: 13, 2: 13, 3: 13, 4: 13, 5: 13, 6: 11 }, closeM = 20 * 60 + 45;
+  var names = ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'];
+  var boxes = [document.getElementById('status'), document.getElementById('status-2')];
+  function now() { return new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Berlin' })); }
+  function dur(m) { var h = Math.floor(m / 60); return (h ? h + ' Std. ' : '') + (m % 60) + ' Min.'; }
+  function tick() {
+    var n = now(), d = n.getDay(), m = n.getHours() * 60 + n.getMinutes(), o = open[d], text, isOpen = false;
+    if (o && m >= o * 60 && m < closeM) { isOpen = true; text = 'Jetzt geöffnet, noch ' + dur(closeM - m); }
+    else if (o && m < o * 60) { text = 'Geschlossen, heute ab ' + o + ':00 Uhr'; }
+    else {
+      var k = d; do { k = (k + 1) % 7; } while (!open[k]);
+      text = 'Geschlossen, ' + (k === (d + 1) % 7 ? 'morgen' : names[k]) + ' ab ' + open[k] + ':00 Uhr';
+    }
+    boxes.forEach(function (b) { b.classList.toggle('is-open', isOpen); b.querySelector('.status-text').textContent = text; });
+    document.querySelectorAll('.hours tr').forEach(function (tr) {
+      tr.classList.toggle('is-today', tr.dataset.days.split(',').indexOf(String(d)) > -1);
+    });
+  }
+  tick(); setInterval(tick, 30000);
+})();
+
+/* Slow crossfade of the hero photographs */
+(function () {
+  var imgs = document.querySelectorAll('.slides img'), i = 0, t;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  function next() { imgs[i].classList.remove('is-on'); i = (i + 1) % imgs.length; imgs[i].classList.add('is-on'); }
+  function start() { t = setInterval(next, 6000); }
+  document.addEventListener('visibilitychange', function () { clearInterval(t); if (!document.hidden) start(); });
+  start();
+})();
+
+/* Entrances */
+(function () {
+  var items = document.querySelectorAll('[data-rise]');
+  if (!('IntersectionObserver' in window)) { items.forEach(function (n) { n.classList.add('is-in'); }); return; }
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -8% 0px' });
+  items.forEach(function (n) { io.observe(n); });
+})();
+</script>
+</body>
+</html>
