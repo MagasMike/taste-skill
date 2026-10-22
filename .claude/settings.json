@@ -1,0 +1,14 @@
+{
+  "extraKnownMarketplaces": {
+    "claude-code-skills": {
+      "source": {
+        "source": "github",
+        "repo": "alirezarezvani/claude-skills"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "marketing-skills@claude-code-skills": true,
+    "finance-skills@claude-code-skills": true
+  }
+}
