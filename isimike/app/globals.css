@@ -3,16 +3,18 @@
 :root {
   --radius: 0.75rem;
   --background: #0f0e0d;
-  --foreground: #f1efea;
-  --muted: #1b1a18;
-  --muted-foreground: #a19d95;
+  --foreground: #f2f2f0;
+  --muted: #1d1c1a;
+  --muted-foreground: #b4b1ab;
   --border: #2b2926;
   --card: #171614;
-  --card-foreground: #f1efea;
-  --primary: #f1efea;
+  --card-foreground: #f2f2f0;
+  --primary: #f2f2f0;
   --primary-foreground: #0f0e0d;
   --accent: #b3242a;
   --accent-foreground: #ffffff;
+  /* Strong ease-out: quick to answer, long soft landing. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 @theme inline {
@@ -29,7 +31,7 @@
   --color-accent-foreground: var(--accent-foreground);
   --radius-lg: var(--radius);
   --font-sans: var(--font-sans-family), "Helvetica Neue", Arial, sans-serif;
-  --font-serif: var(--font-serif-family), "Times New Roman", serif;
+  --ease-out: var(--ease-out);
 }
 
 html {
@@ -40,4 +42,67 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  font-size: 17px;
+}
+
+@layer base {
+  a {
+    color: inherit;
+  }
+}
+
+/* The wheel sizes its index off the card (about 10px here); keep it readable. */
+.dish-wheel ol {
+  font-size: 15px !important;
+}
+
+/* On this dark ground the card's light drop edge reads as a glow, and the
+   blurred hover chip as glass: give both flat surfaces instead. */
+.dish-wheel [role="option"] > span {
+  box-shadow: none; /* taste-skill-ignore */
+}
+
+.dish-wheel [role="option"] .backdrop-blur-sm { /* taste-skill-ignore */
+  backdrop-filter: none; /* taste-skill-ignore */
+  background: var(--background);
+  font-size: 13px;
+}
+
+/* On a phone the wheel's own type comes out near 11px. Set the ring label at a
+   readable size and drop the front-card title: the index above already marks
+   the dish at the front. */
+@media (max-width: 767px) {
+  .dish-wheel .place-items-center {
+    font-size: 22px !important;
+  }
+
+  .dish-wheel .left-\[8\%\] {
+    display: none;
+  }
+}
+
+/* Section entrances: heading, then text, then picture, staggered by --i. */
+.js-reveal [data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 700ms var(--ease-out),
+    transform 700ms var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 80ms);
+}
+
+.js-reveal [data-reveal][data-shown] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .js-reveal [data-reveal] {
+    transform: none;
+    transition: opacity 300ms linear;
+  }
 }

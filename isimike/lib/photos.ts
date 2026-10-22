@@ -1,20 +1,37 @@
 import type { CarouselItem } from "@/components/ui/3-d-coverflow-carousel"
+import type { WorksWheelItem } from "@/components/ui/works-wheel"
 
-// Photos from Wikimedia Commons, cropped to 2:3. Licences require the credits below.
+// Photos from Unsplash (Unsplash License), downloaded and cropped into public/photos.
+// Wheel photos are 1200×828 to match the wheel's card ratio; carousel photos are 2:3.
+const unsplash = (slug: string) => `https://unsplash.com/photos/${slug}`
+
 export const photos = {
-  gyrosWrap: { src: "photos/gyros-wrap.jpg", author: "Andy Li", license: "CC0", file: "Mix_Gyros_(Chicken_&_Pork)_Pitta_Wrap_-_Montague_Gyros_2025-12-06.jpg" },
-  gyrosPita: { src: "photos/gyros-pita.jpg", author: "Benoît Prieur", license: "CC0", file: "Pita_Gyros_à_Almyrida_(juillet_2021)_-_4.jpg" },
-  gyrosMaking: { src: "photos/gyros-making.jpg", author: "Neon Tommy", license: "CC BY-SA 2.0", file: "Gyros_pita_making.jpg" },
-  souvlakiGrill: { src: "photos/souvlaki-grill.jpg", author: "George M. Groutas", license: "CC BY 2.0", file: "Preparing_souvlaki.jpg" },
-  souvlakiPlate: { src: "photos/souvlaki-plate.jpg", author: "Cifo Buscemi", license: "CC BY 3.0", file: "Souvlakiplate.jpg" },
-  whiteTower: { src: "photos/white-tower.jpg", author: "Hermann Hammer", license: "CC BY-SA 4.0", file: "White_Tower_in_Thessaloniki.jpg" },
-  aristotelous: { src: "photos/aristotelous.jpg", author: "Park Hotel-1", license: "CC0", file: "View_of_Aristotelous_Square_in_Thessaloniki.jpg" },
+  pitaGyrosHand: { src: "photos/pita-gyros-hand.jpg", author: "Bruna Santos", page: unsplash("TlJMk-f73lw") },
+  gyrosCloseup: { src: "photos/gyros-closeup.jpg", author: "Nick Nice", page: unsplash("t_MgBtiEZV4") },
+  bifteki: { src: "photos/bifteki.jpg", author: "Arne Buss", page: unsplash("7JeWJHeHtWA") },
+  grillBoard: { src: "photos/grill-board.jpg", author: "Victoria Shes", page: unsplash("UC0HZdUitWY") },
+  bauernsalat: { src: "photos/bauernsalat.jpg", author: "William Wallace", page: unsplash("Dk4RNTHXlAA") },
+  tzatziki: { src: "photos/tzatziki.jpg", author: "Arne Buss", page: unsplash("gNWwfcsD4ZQ") },
+  pitaPaper: { src: "photos/pita-paper.jpg", author: "Jojo Yuen", page: unsplash("_NRm7Xna_KY") },
+  whiteTower: { src: "photos/white-tower.jpg", author: "Merve Sağlam", page: unsplash("s5jAiWZFFQQ") },
+  souvlakiCharcoal: { src: "photos/souvlaki-charcoal.jpg", author: "Mihir Sabnis", page: unsplash("FOZbF67e-DE") },
+  pitaFries: { src: "photos/pita-fries.jpg", author: "irws", page: unsplash("pUCck5WyUH4") },
+  souvlakiPlate: { src: "photos/souvlaki-plate.jpg", author: "Markus Winkler", page: unsplash("WHtVB-RiW2I") },
+  aristotelous: { src: "photos/aristotelous.jpg", author: "Ayad Hendy", page: unsplash("6gMvxGRF5dg") },
+  gyrosSpit: { src: "photos/gyros-spit.jpg", author: "Syed Hussaini", page: unsplash("SbdKIToYH1c") },
 }
 
-export const photoCredits = Object.values(photos).map((p) => ({
-  ...p,
-  href: `https://commons.wikimedia.org/wiki/File:${encodeURIComponent(p.file)}`,
-}))
+export const photoCredits = Object.values(photos)
+
+// The wheel turns through dishes from the menu; every card leads to it.
+export const dishes: WorksWheelItem[] = [
+  { title: "Pita Gyros", image: photos.pitaGyrosHand.src, href: "#menu" },
+  { title: "Souvlaki", image: photos.grillBoard.src, href: "#menu" },
+  { title: "Bifteki", image: photos.bifteki.src, href: "#menu" },
+  { title: "Gyros", image: photos.gyrosCloseup.src, href: "#menu" },
+  { title: "Bauernsalat", image: photos.bauernsalat.src, href: "#menu" },
+  { title: "Tzatziki", image: photos.tzatziki.src, href: "#menu" },
+]
 
 export const highlights: CarouselItem[] = [
   {
@@ -22,7 +39,7 @@ export const highlights: CarouselItem[] = [
     titleLine1: "Pita Gyros",
     titleLine2: "– wie in Thessaloniki",
     desc: "Mit Pommes, Tomaten, Tzatziki und Zwiebeln, eingerollt in warme Pita",
-    img: photos.gyrosWrap.src,
+    img: photos.pitaPaper.src,
     ctaText: "Zur Speisekarte",
     ctaUrl: "#menu",
   },
@@ -40,7 +57,7 @@ export const highlights: CarouselItem[] = [
     titleLine1: "Souvlaki",
     titleLine2: "– frisch am Spieß",
     desc: "Schwein oder Hähnchen, über Holzkohle gegrillt",
-    img: photos.souvlakiGrill.src,
+    img: photos.souvlakiCharcoal.src,
     ctaText: "Zur Speisekarte",
     ctaUrl: "#menu",
   },
@@ -49,7 +66,7 @@ export const highlights: CarouselItem[] = [
     titleLine1: "Pitabrot",
     titleLine2: "– warm von der Platte",
     desc: "Jede Pita wird frisch für Sie gebacken",
-    img: photos.gyrosMaking.src,
+    img: photos.pitaFries.src,
     ctaText: "Jetzt bestellen",
     ctaUrl: "#order",
   },
@@ -76,7 +93,7 @@ export const highlights: CarouselItem[] = [
     titleLine1: "Gyros Pita",
     titleLine2: "– Schwein oder Hähnchen",
     desc: "Knusprig vom Spieß geschnitten, mit hausgemachtem Tzatziki",
-    img: photos.gyrosPita.src,
+    img: photos.gyrosSpit.src,
     ctaText: "Jetzt bestellen",
     ctaUrl: "#order",
   },

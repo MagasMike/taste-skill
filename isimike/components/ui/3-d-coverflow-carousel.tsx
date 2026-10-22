@@ -110,7 +110,6 @@ export function CoverFlowCarousel({
   const [isHovered, setIsHovered] = useState(false);
   const touchStartX = useRef(0);
   const total = items.length;
-  const glow = (pct: number) => `color-mix(in srgb, ${accentColor} ${pct}%, transparent)`;
 
   const nextSlide = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % total);
@@ -183,30 +182,19 @@ export function CoverFlowCarousel({
         <div
           className="absolute inset-0"
           style={{
-            background: `radial-gradient(circle at center, color-mix(in srgb, ${backgroundColor} 30%, transparent) 0%, color-mix(in srgb, ${backgroundColor} 92%, transparent) 100%)`,
+            backgroundColor: `color-mix(in srgb, ${backgroundColor} 55%, transparent)`,
           }}
         />
       </div>
 
       <div className="relative w-full max-w-6xl mx-auto px-4 z-10 flex flex-col items-center">
-        {/* Eyebrow */}
         {sectionLabel && (
-          <div className="flex items-center gap-3 mb-8">
-            <span style={{ width: "36px", height: "1px", background: `linear-gradient(90deg, transparent, ${accentColor})` }} />
-            <h3
-              style={{
-                fontSize: "0.75rem",
-                fontWeight: 700,
-                letterSpacing: "0.3em",
-                textTransform: "uppercase",
-                color: accentColor,
-                margin: 0,
-              }}
-            >
-              {sectionLabel}
-            </h3>
-            <span style={{ width: "36px", height: "1px", background: `linear-gradient(90deg, ${accentColor}, transparent)` }} />
-          </div>
+          <h2
+            className="mb-10 text-center text-4xl font-medium tracking-[-0.035em] md:text-6xl"
+            style={{ margin: "0 0 2.5rem", lineHeight: 1.02 }}
+          >
+            {sectionLabel}
+          </h2>
         )}
 
         {/* 3D Coverflow Stage */}
@@ -262,16 +250,12 @@ export function CoverFlowCarousel({
                   borderRadius: "18px",
                   overflow: "hidden",
                   backgroundColor: "#171311",
-                  border: "1px solid rgba(255, 255, 255, 0.12)",
                   transform,
                   opacity,
                   zIndex,
                   filter,
                   transformOrigin: "center center",
                   transition: "all 800ms cubic-bezier(0.25, 1, 0.5, 1)",
-                  boxShadow: isCenter
-                    ? `0 25px 60px rgba(0,0,0,0.9), 0 0 35px ${glow(25)}`
-                    : "0 15px 35px rgba(0,0,0,0.5)",
                   cursor: isCenter ? "default" : "pointer",
                 }}
               >
@@ -293,8 +277,9 @@ export function CoverFlowCarousel({
                   style={{
                     position: "absolute",
                     inset: 0,
+                    // Neutral scrim under the card text.
                     background:
-                      "linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 25%, rgba(0,0,0,0.68) 60%, rgba(0,0,0,0.96) 100%)",
+                      "linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 25%, rgba(0,0,0,0.68) 60%, rgba(0,0,0,0.96) 100%)", // taste-skill-ignore
                     pointerEvents: "none",
                     zIndex: 10,
                   }}
@@ -314,7 +299,10 @@ export function CoverFlowCarousel({
                     zIndex: 20,
                     opacity: isCenter ? 1 : 0,
                     transform: isCenter ? "translateY(0px)" : "translateY(16px)",
-                    transition: "opacity 500ms ease, transform 500ms ease",
+                    // Hidden, not just transparent, once faded: the side cards' titles
+                    // would otherwise sit under the centre card for screen readers too.
+                    visibility: isCenter ? "visible" : "hidden",
+                    transition: `opacity 500ms ease, transform 500ms ease, visibility 0s linear ${isCenter ? "0ms" : "500ms"}`,
                     pointerEvents: isCenter ? "auto" : "none",
                   }}
                 >
@@ -323,11 +311,9 @@ export function CoverFlowCarousel({
                     <span
                       style={{
                         display: "inline-block",
-                        fontSize: "0.78rem",
+                        fontSize: "0.875rem",
                         fontWeight: 600,
-                        letterSpacing: "0.06em",
-                        color: "rgba(255,255,255,0.9)",
-                        textShadow: "0 2px 6px rgba(0,0,0,0.8)",
+                        color: "#ffffff",
                       }}
                     >
                       {item.tag}
@@ -345,58 +331,40 @@ export function CoverFlowCarousel({
                       paddingBottom: "4px",
                     }}
                   >
-                    <h2
+                    <h3
                       style={{
-                        fontSize: "1.65rem",
-                        fontWeight: 900,
-                        textTransform: "uppercase",
-                        letterSpacing: "0.04em",
+                        fontSize: "1.9rem",
+                        fontWeight: 600,
+                        letterSpacing: "-0.03em",
                         color: "#ffffff",
                         margin: 0,
-                        lineHeight: 1.1,
-                        textShadow: "0 3px 12px rgba(0,0,0,0.95)",
+                        lineHeight: 1.05,
                       }}
                     >
                       {item.titleLine1}
-                    </h2>
+                    </h3>
 
                     {item.titleLine2 && (
                       <span
                         style={{
-                          fontSize: "1.1rem",
-                          fontWeight: 700,
-                          textTransform: "uppercase",
-                          letterSpacing: "0.06em",
-                          color: "#f3f0ea",
-                          lineHeight: 1.2,
-                          textShadow: "0 3px 10px rgba(0,0,0,0.9)",
+                          fontSize: "1.05rem",
+                          fontWeight: 500,
+                          color: "#ffffff",
+                          lineHeight: 1.25,
                         }}
                       >
                         {item.titleLine2}
                       </span>
                     )}
 
-                    <div
-                      style={{
-                        width: "34px",
-                        height: "2px",
-                        backgroundColor: accentColor,
-                        borderRadius: "2px",
-                        margin: "5px auto 4px",
-                        boxShadow: `0 0 8px ${glow(70)}`,
-                      }}
-                    />
-
                     {item.desc && (
                       <p
                         style={{
-                          fontSize: "0.82rem",
-                          fontStyle: "italic",
-                          color: "rgba(255,255,255,0.9)",
+                          fontSize: "0.95rem",
+                          color: "#ffffff",
                           maxWidth: "280px",
-                          margin: "0 0 10px",
-                          lineHeight: 1.3,
-                          textShadow: "0 2px 8px rgba(0,0,0,0.9)",
+                          margin: "10px 0 14px",
+                          lineHeight: 1.4,
                         }}
                       >
                         {item.desc}
@@ -405,6 +373,7 @@ export function CoverFlowCarousel({
 
                     <a
                       href={item.ctaUrl || "#"}
+                      className="transition-transform duration-150 ease-out active:scale-[0.97]"
                       onClick={(e) => {
                         if (onCtaClick) {
                           e.preventDefault();
@@ -415,18 +384,14 @@ export function CoverFlowCarousel({
                         display: "inline-flex",
                         alignItems: "center",
                         gap: "6px",
-                        padding: "7px 18px",
+                        padding: "10px 20px",
                         borderRadius: "9999px",
-                        background: `linear-gradient(135deg, ${accentColor} 0%, color-mix(in srgb, ${accentColor} 80%, black) 100%)`,
+                        backgroundColor: accentColor,
                         color: accentForeground,
-                        fontSize: "0.72rem",
-                        fontWeight: 800,
-                        letterSpacing: "0.14em",
-                        textTransform: "uppercase",
+                        fontSize: "0.95rem",
+                        fontWeight: 600,
                         textDecoration: "none",
-                        boxShadow: `0 4px 14px rgba(0,0,0,0.4), 0 0 15px ${glow(30)}`,
                         cursor: "pointer",
-                        transition: "transform 200ms ease, box-shadow 200ms ease",
                       }}
                     >
                       <span>{item.ctaText || "View Menu"}</span>
@@ -443,6 +408,7 @@ export function CoverFlowCarousel({
         <button
           onClick={prevSlide}
           aria-label="Previous slide"
+          className="active:scale-[0.94]"
           style={{
             position: "absolute",
             left: "24px",
@@ -451,15 +417,13 @@ export function CoverFlowCarousel({
             width: "46px",
             height: "46px",
             borderRadius: "50%",
-            backgroundColor: "rgba(0,0,0,0.55)",
-            border: "1px solid rgba(255,255,255,0.2)",
+            backgroundColor: "#1d1c1a",
+            border: "none",
             color: "#ffffff",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            backdropFilter: "blur(8px)",
             cursor: "pointer",
-            boxShadow: "0 8px 24px rgba(0,0,0,0.4)",
             zIndex: 40,
             transition: "all 200ms ease",
           }}
@@ -470,6 +434,7 @@ export function CoverFlowCarousel({
         <button
           onClick={nextSlide}
           aria-label="Next slide"
+          className="active:scale-[0.94]"
           style={{
             position: "absolute",
             right: "24px",
@@ -478,15 +443,13 @@ export function CoverFlowCarousel({
             width: "46px",
             height: "46px",
             borderRadius: "50%",
-            backgroundColor: "rgba(0,0,0,0.55)",
-            border: "1px solid rgba(255,255,255,0.2)",
+            backgroundColor: "#1d1c1a",
+            border: "none",
             color: "#ffffff",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            backdropFilter: "blur(8px)",
             cursor: "pointer",
-            boxShadow: "0 8px 24px rgba(0,0,0,0.4)",
             zIndex: 40,
             transition: "all 200ms ease",
           }}
@@ -508,7 +471,6 @@ export function CoverFlowCarousel({
                 backgroundColor: idx === currentIndex ? accentColor : "rgba(255,255,255,0.25)",
                 border: "none",
                 cursor: "pointer",
-                boxShadow: idx === currentIndex ? `0 0 10px ${glow(70)}` : "none",
                 transition: "all 300ms ease",
               }}
             />

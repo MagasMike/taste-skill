@@ -1,18 +1,11 @@
 import type { Metadata } from "next";
-import { Commissioner, Noto_Serif_Display } from "next/font/google";
+import { Commissioner } from "next/font/google";
 import "./globals.css";
 
 const sans = Commissioner({
   variable: "--font-sans-family",
   subsets: ["latin", "latin-ext"],
   weight: ["400", "500", "600"],
-});
-
-const serif = Noto_Serif_Display({
-  variable: "--font-serif-family",
-  subsets: ["latin", "latin-ext"],
-  weight: ["400"],
-  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
@@ -27,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de">
-      <body className={`${sans.variable} ${serif.variable} antialiased`}>
+      <body className={`${sans.variable} antialiased`}>
         {children}
       </body>
     </html>
