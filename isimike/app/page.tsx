@@ -1,7 +1,9 @@
 import { ArrowUpRight, Clock, MapPin, Phone } from "lucide-react";
 
+import { CoverFlowCarousel } from "@/components/ui/3-d-coverflow-carousel";
 import SculptureHero from "@/components/ui/liquid-sculpture-hero";
 import { formatPrice, menu, type MenuSection } from "@/lib/menu";
+import { highlights, photoCredits } from "@/lib/photos";
 import { site } from "@/lib/site";
 
 const logo = "/isimike-logo.png";
@@ -82,6 +84,16 @@ export default function Home() {
           <p>Kommen Sie mittags oder abends vorbei, bestellen Sie zum Mitnehmen oder lassen Sie sich liefern.</p>
         </div>
       </section>
+
+      <CoverFlowCarousel
+        items={highlights}
+        sectionLabel="Aus Thessaloniki"
+        accentColor="#c9302f"
+        accentForeground="#ffffff"
+        backgroundColor="#0f0e0d"
+        fontFamily="var(--font-sans)"
+        className="border-t border-border"
+      />
 
       <section id="menu" className="border-t border-border">
         <div className="mx-auto max-w-6xl px-5 py-24 md:px-12 md:py-32">
@@ -189,6 +201,17 @@ export default function Home() {
       <footer className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-5 py-8 text-sm text-muted-foreground md:px-12">
         <span className="font-semibold text-foreground">{site.name}</span>
         <span>© {new Date().getFullYear()} {site.name}. Alle Rechte vorbehalten.</span>
+        <p className="w-full text-xs leading-relaxed opacity-70">
+          Bildnachweis (Wikimedia Commons, zugeschnitten):{" "}
+          {photoCredits.map((c, i) => (
+            <span key={c.src}>
+              <a href={c.href} target="_blank" rel="noopener" className="underline-offset-2 hover:underline">
+                {c.author}
+              </a>{" "}
+              ({c.license}){i < photoCredits.length - 1 ? ", " : "."}
+            </span>
+          ))}
+        </p>
       </footer>
     </main>
   );
