@@ -100,6 +100,19 @@ Run these inside Claude Code. The skill is namespaced under `taste-skill:`, so i
 </details>
 
 <details>
+<summary>Marketing and finance skills (Claude Code plugins)</summary>
+
+Optional companion plugins from [alirezarezvani/claude-skills](https://github.com/alirezarezvani/claude-skills). Run these inside Claude Code:
+
+```
+/plugin marketplace add alirezarezvani/claude-skills
+/plugin install marketing-skills@claude-code-skills
+/plugin install finance-skills@claude-code-skills
+```
+
+</details>
+
+<details>
 <summary>Codex plugin</summary>
 
 ```bash
